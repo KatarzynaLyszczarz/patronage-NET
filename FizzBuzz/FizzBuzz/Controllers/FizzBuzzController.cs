@@ -14,7 +14,6 @@ namespace FizzBuzz.Controllers
         /// <returns>Fizz, Buzz, FizzBuzz or empty.</returns>
         /// /// <response code="200">Success</response>
         /// <response code="400">Value out of 0-1000</response> 
-
         [HttpGet("{value}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
