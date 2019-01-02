@@ -20,6 +20,7 @@ namespace FizzBuzz.Controllers
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Produces("text/plain")]
         public async Task<ActionResult> Mocky()
         {
             using (var client = new HttpClient())
@@ -32,11 +33,13 @@ namespace FizzBuzz.Controllers
                 {
                     HttpResponseMessage response = await client.GetAsync("v2/5c127054330000e133998f85");
                     response.EnsureSuccessStatusCode();
-                    return Content(await response.Content.ReadAsStringAsync());
+                    //Request.ContentType = "text/plain";
+                    return Content (await response.Content.ReadAsStringAsync());
                 }
                 catch (Exception e)
                 {
                     return BadRequest(e.Message);
+                    
                 }
 
             }
