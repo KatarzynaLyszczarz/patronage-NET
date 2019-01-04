@@ -17,11 +17,6 @@ namespace FizzBuzz.Controllers
         /// <returns>Content</returns>
         /// <response code="200">Success</response>
         /// <response code="400">Failure</response>
-
-        private readonly IMockyService mocky;
-        public MockyController(IMockyService mocky)
-        { this.mocky = mocky; }
-
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
