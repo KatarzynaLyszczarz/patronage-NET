@@ -57,8 +57,10 @@ namespace FizzBuzz
             }
             else
             {
+                app.UseExceptionHandler("/error");
                 app.UseHsts();
             }
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
