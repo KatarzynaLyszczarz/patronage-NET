@@ -16,9 +16,11 @@ namespace FizzBuzz.Middlewares
         private FileStream file;
         long maxsize = 1000 * 1024;
 
-        public Logger(RequestDelegate next)
+        public Logger(RequestDelegate next, string path, long maxsize)
         {
+            this.path = path;
             this.next = next;
+            this.maxsize = maxsize;
             file = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
             file.Seek(0, SeekOrigin.End);
         }
