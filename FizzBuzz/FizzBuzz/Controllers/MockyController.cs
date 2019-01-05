@@ -11,6 +11,11 @@ namespace FizzBuzz.Controllers
     [Route("api/[controller]")]
     public class MockyController : Controller
     {
+        private readonly IMockyService mocky;
+        public MockyController(IMockyService mocky)
+        {
+            this.mocky = mocky;
+        }
         /// <summary>
         /// Requests http://www.mocky.io/v2/5c127054330000e133998f85 and returns content.
         /// </summary>
@@ -21,28 +26,17 @@ namespace FizzBuzz.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Produces("text/plain")]
-        public async Task<ActionResult> Mocky()
+        public async Task<ActionResult<string>> Mocky()
         {
-            using (var client = new HttpClient())
+            try
             {
-                client.BaseAddress = new Uri("http://www.mocky.io/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                try
-                {
-                    HttpResponseMessage response = await client.GetAsync("v2/5c127054330000e133998f85");
-                    response.EnsureSuccessStatusCode();
-                    //Request.ContentType = "text/plain";
-                    return Content (await response.Content.ReadAsStringAsync());
-                }
-                catch (Exception e)
-                {
-                    return BadRequest(e.Message);
-                    
-                }
-
+                return await mocky.GetContent();
             }
+             catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            
         }
     }
 }
