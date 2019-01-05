@@ -11,6 +11,11 @@ namespace FizzBuzz.Controllers
     [Route("api/[controller]")]
     public class MockyController : Controller
     {
+        private readonly IMockyService mocky;
+        public MockyController(IMockyService mocky)
+        {
+            this.mocky = mocky;
+        }
         /// <summary>
         /// Requests http://www.mocky.io/v2/5c127054330000e133998f85 and returns content.
         /// </summary>
